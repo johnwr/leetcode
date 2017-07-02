@@ -81,6 +81,15 @@ class JsonTestCase {
         Integer::class.java -> this
         ArrayList::class.java -> when (clazz) {
             Array<Int>::class.java -> (this as ArrayList<Int>).toTypedArray()
+            ListNode::class.java -> (this as ArrayList<Int>).let {
+                val result = ListNode(0)
+                var current = result
+                it.forEach {
+                    current.next = ListNode(it)
+                    current = current.next!!
+                }
+                result.next!!
+            }
             else -> throw RuntimeException("unable to transform, this: $this to clazz: $clazz")
         }
         else -> throw RuntimeException("unable to transform, this: $this to clazz: $clazz")
