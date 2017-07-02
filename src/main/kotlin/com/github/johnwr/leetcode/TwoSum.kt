@@ -5,21 +5,16 @@ package com.github.johnwr.leetcode
  */
 class TwoSum {
     fun solve(
-        nums: IntArray,
+        nums: Array<Int>,
         target: Int
-    ): IntArray {
+    ): Array<Int> {
         val differences = mutableMapOf<Int, Int>()
         nums.forEachIndexed { index, it ->
             differences[it]?.let {
-                return intArrayOf(it, index)
+                return arrayOf(it, index)
             }
             differences[target - it] = index
         }
         return null!!
     }
-
-    fun solve(
-        nums: List<Int>,
-        target: Int
-    ): List<Int> = solve(nums.toIntArray(), target).toList()
 }
