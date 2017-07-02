@@ -19,6 +19,15 @@ dependencies {
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 
+    def reflections_version = '0.9.11'
+    testCompile "org.reflections:reflections:$reflections_version"
+
+    def jackson_version = '2.8.9'
+    testCompile "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
+
+    def guava_version = '22.0'
+    testCompile "com.google.guava:guava:$guava_version"
+
     def junit_version = '4.12'
     testCompile "junit:junit:$junit_version"
 }
