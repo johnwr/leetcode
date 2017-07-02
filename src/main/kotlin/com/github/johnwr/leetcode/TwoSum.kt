@@ -4,10 +4,16 @@ package com.github.johnwr.leetcode
  * https://leetcode.com/problems/two-sum
  */
 class TwoSum {
-    fun solve(
+    fun solve(nums: Array<Int>, target: Int) = onePassHashTable(nums, target)
+
+    /**
+     * time: O(n)
+     * space: O(n)
+     */
+    private fun onePassHashTable(
         nums: Array<Int>,
         target: Int
-    ): Array<Int> {
+    ) : Array<Int> {
         val differences = mutableMapOf<Int, Int>()
         nums.forEachIndexed { index, it ->
             differences[it]?.let {
@@ -15,6 +21,6 @@ class TwoSum {
             }
             differences[target - it] = index
         }
-        return null!!
+        throw IllegalArgumentException("No two sum solution")
     }
 }
