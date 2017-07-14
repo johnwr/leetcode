@@ -79,6 +79,7 @@ class JsonTestCase {
     private fun <T> Any.transform(clazz: Class<T>): T = when (this.javaClass) {
         clazz -> this
         Integer::class.java -> this
+        java.lang.Boolean::class.java -> this
         ArrayList::class.java -> when (clazz) {
             Array<Int>::class.java -> (this as ArrayList<Int>).toTypedArray()
             ListNode::class.java -> (this as ArrayList<Int>).let {
@@ -90,12 +91,33 @@ class JsonTestCase {
                 }
                 result.next!!
             }
-            else -> throw RuntimeException("unable to transform, this: $this to clazz: $clazz")
+            TreeNode::class.java -> (this as ArrayList<Integer>).let {
+                treeNode(it)
+            }
+            else -> throw RuntimeException("unable to transform, this: $this from: ${this.javaClass} to: $clazz")
         }
-        else -> throw RuntimeException("unable to transform, this: $this to clazz: $clazz")
+        else -> throw RuntimeException("unable to transform, this: $this from: ${this.javaClass} to: $clazz")
     } as T
 
     private data class Info (
         val args: List<String> = emptyList()
     )
+
+    private fun treeNode(
+        array: ArrayList<Integer>,
+        index: Int = 1
+    ) : TreeNode? {
+        if (array == null) {
+            return null
+        } else if (array.size < index) {
+            return null
+        } else if (array[index - 1] == null) {
+            return null
+        }
+
+        val node = TreeNode(array[index - 1] as Int)
+        node.left = treeNode(array, index * 2)
+        node.right = treeNode(array, index * 2 + 1)
+        return node
+    }
 }

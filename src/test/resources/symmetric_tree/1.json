@@ -1,0 +1,4 @@
+{
+  "root": [1,2,2,null,3,null,3],
+  "expected": false
+}
